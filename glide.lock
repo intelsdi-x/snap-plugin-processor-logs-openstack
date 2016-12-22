@@ -1,0 +1,38 @@
+hash: fad6686583b83c4453da080a2fdf788d158b70735070aa15ab1de7a825817b28
+updated: 2016-12-22T15:34:54.938693322+01:00
+imports:
+- name: github.com/golang/protobuf
+  version: 8ee79997227bf9b34611aee7946ae64735e6fd93
+  subpackages:
+  - proto
+- name: github.com/intelsdi-x/snap-plugin-lib-go
+  version: 4b5999a62ffb7604f173c1ab3c2205ba8b559624
+  subpackages:
+  - v1/plugin
+  - v1/plugin/rpc
+- name: github.com/julienschmidt/httprouter
+  version: 5dd70ee059943e81987a817fa1a755b11dd119c1
+- name: golang.org/x/net
+  version: 45e771701b814666a7eb299e6c7a57d0b1799e91
+  subpackages:
+  - context
+  - http2
+  - http2/hpack
+  - idna
+  - internal/timeseries
+  - lex/httplex
+  - trace
+- name: google.golang.org/grpc
+  version: 0032a855ba5c8a3c8e0d71c2deef354b70af1584
+  subpackages:
+  - codes
+  - credentials
+  - grpclog
+  - internal
+  - metadata
+  - naming
+  - peer
+  - stats
+  - tap
+  - transport
+testImports: []
