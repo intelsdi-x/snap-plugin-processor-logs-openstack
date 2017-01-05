@@ -1,5 +1,5 @@
-hash: fad6686583b83c4453da080a2fdf788d158b70735070aa15ab1de7a825817b28
-updated: 2016-12-22T15:34:54.938693322+01:00
+hash: 02316e997efdd76bb8760fe4f8266972c01d6dc2f00760c069fac6677131b820
+updated: 2017-01-02T16:12:06.425712461+01:00
 imports:
 - name: github.com/golang/protobuf
   version: 8ee79997227bf9b34611aee7946ae64735e6fd93
@@ -12,8 +12,10 @@ imports:
   - v1/plugin/rpc
 - name: github.com/julienschmidt/httprouter
   version: 5dd70ee059943e81987a817fa1a755b11dd119c1
+- name: github.com/Sirupsen/logrus
+  version: d26492970760ca5d33129d2d799e34be5c4782eb
 - name: golang.org/x/net
-  version: 45e771701b814666a7eb299e6c7a57d0b1799e91
+  version: 8fd7f25955530b92e73e9e1932a41b522b22ccd9
   subpackages:
   - context
   - http2
@@ -22,6 +24,10 @@ imports:
   - internal/timeseries
   - lex/httplex
   - trace
+- name: golang.org/x/sys
+  version: d75a52659825e75fff6158388dddc6a5b04f9ba5
+  subpackages:
+  - unix
 - name: google.golang.org/grpc
   version: 0032a855ba5c8a3c8e0d71c2deef354b70af1584
   subpackages:
@@ -35,4 +41,21 @@ imports:
   - stats
   - tap
   - transport
-testImports: []
+testImports:
+- name: github.com/gopherjs/gopherjs
+  version: db2cfff3878815d744fb4a4bd07cba0596eaf2a5
+  subpackages:
+  - js
+- name: github.com/jtolds/gls
+  version: bb0351aa7eb6f322f32667d51375f26a2bca6628
+- name: github.com/smartystreets/assertions
+  version: 26acb9229f421449ac63d014995b282d59261a8b
+  subpackages:
+  - internal/go-render/render
+  - internal/oglematchers
+- name: github.com/smartystreets/goconvey
+  version: d4c757aa9afd1e2fc1832aaab209b5794eb336e1
+  subpackages:
+  - convey
+  - convey/gotest
+  - convey/reporting

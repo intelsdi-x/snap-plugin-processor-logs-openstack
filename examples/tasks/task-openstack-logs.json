@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "schedule": {
+    "type": "simple",
+    "interval": "1s"
+  },
+  "workflow": {
+    "collect": {
+      "metrics": {
+        "/intel/logs/*": {}
+      },
+      "process": [
+        {
+          "plugin_name": "logs-openstack",
+          "config": {},
+          "publish": [
+            {
+              "plugin_name": "file",
+              "config": {
+                "file": "/tmp/published_logs.log"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
