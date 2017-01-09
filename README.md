@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/intelsdi-x/snap-plugin-processor-logs-openstack.svg?token=zPZwRQ3ErqZxmoixdxAF&branch=master)](https://travis-ci.com/intelsdi-x/snap-plugin-processor-logs-openstack)
+
 # Snap plugin processor - logs-openstack
 
 Snap plugin intended to process openstack logs collected by [snap-plugin-collector-logs](https://github.com/intelsdi-x/snap-plugin-collector-logs).
