@@ -44,9 +44,7 @@ const (
 	// 	<timestamp> <pid> <severity_label> <python_module> <payload>
 	//
 	// 	Example: 	2016-12-08 03:18:49.626 20 ERROR nova.api.openstack.extensions some_message
-	//
-	//timestampRegexp = `(?P<YYYY>\d{4})-(?P<MM>\d{2})-(?P<DD>\d{2})[( |T)](?P<HH>\d{2}):(?P<mm>\d{2}):(?P<ss>\d{2})[.]?(?P<s>\d+)?`
-
+	//	
 	timestampRegexp = `(?P<timestamp>(\d{4})-(\d{2})-(\d{2})[( |T)](\d{2}):(\d{2}):(\d{2})[.]?(\d+)?)`
 	logRegexp       = timestampRegexp + `[ ](?P<pid>\d+)[ ](?P<severity_label>\S+)[ ](?P<python_module>\S+)[ ](?P<payload>.*)`
 
