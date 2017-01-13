@@ -52,6 +52,8 @@ func TestProcess(t *testing.T) {
 		processor := New()
 		So(processor, ShouldNotBeNil)
 
+		localTimeZone, _ := time.Now().Zone()
+
 		Convey("Process metrics containing openstack log", func() {
 			Convey("from Openstack Nova Service", func() {
 				for i, mockNovaLog := range mockNovaLogs {
@@ -65,6 +67,8 @@ func TestProcess(t *testing.T) {
 						Convey("verify post-processing metric's values", func() {
 							So(processedMetrics[0].Data, ShouldEqual, expected.data)
 							So(processedMetrics[0].Tags, ShouldResemble, expected.tags)
+							logTimeZone, _ := processedMetrics[0].Timestamp.Zone()
+							So(logTimeZone, ShouldEqual, localTimeZone)
 						})
 					})
 				}
@@ -81,6 +85,8 @@ func TestProcess(t *testing.T) {
 						Convey("verify post-processing metric's values", func() {
 							So(processedMetrics[0].Data, ShouldEqual, expected.data)
 							So(processedMetrics[0].Tags, ShouldResemble, expected.tags)
+							logTimeZone, _ := processedMetrics[0].Timestamp.Zone()
+							So(logTimeZone, ShouldEqual, localTimeZone)
 						})
 					})
 				}
@@ -97,6 +103,8 @@ func TestProcess(t *testing.T) {
 						Convey("verify post-processing metric's values", func() {
 							So(processedMetrics[0].Data, ShouldEqual, expected.data)
 							So(processedMetrics[0].Tags, ShouldResemble, expected.tags)
+							logTimeZone, _ := processedMetrics[0].Timestamp.Zone()
+							So(logTimeZone, ShouldEqual, localTimeZone)
 						})
 					})
 				}
@@ -113,6 +121,8 @@ func TestProcess(t *testing.T) {
 						Convey("verify post-processing metric's values", func() {
 							So(processedMetrics[0].Data, ShouldEqual, expected.data)
 							So(processedMetrics[0].Tags, ShouldResemble, expected.tags)
+							logTimeZone, _ := processedMetrics[0].Timestamp.Zone()
+							So(logTimeZone, ShouldEqual, localTimeZone)
 						})
 					})
 				}
@@ -129,6 +139,8 @@ func TestProcess(t *testing.T) {
 						Convey("verify post-processing metric's values", func() {
 							So(processedMetrics[0].Data, ShouldEqual, expected.data)
 							So(processedMetrics[0].Tags, ShouldResemble, expected.tags)
+							logTimeZone, _ := processedMetrics[0].Timestamp.Zone()
+							So(logTimeZone, ShouldEqual, localTimeZone)
 						})
 					})
 				}

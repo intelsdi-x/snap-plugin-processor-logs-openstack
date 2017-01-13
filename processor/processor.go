@@ -35,7 +35,7 @@ const (
 	//Version of the plugin
 	Version = 1
 
-	timeFormat = "2006-01-02 15:04:05"
+	timeFormat = "2006-01-02 15:04:05 MST"
 )
 
 const (
@@ -78,12 +78,13 @@ const (
 	httpRequestAddressesRegexp = `(?P<http_client_ip_address>` + ipAddressesRegexp + `)([,])?(?P<http_server_ip_address>` + ipAddressesRegexp + `)?`
 )
 
-// Plugin holds regular expressions needed to process openstack logs
+// Plugin holds regular expressions and timezone needed to process openstack logs
 type Plugin struct {
 	logRgx                  *regexp.Regexp
 	requestContextRgx       *regexp.Regexp
 	httpRequestContextRgx   *regexp.Regexp
 	httpRequestAddressesRgx *regexp.Regexp
+	timezone                string
 }
 
 var severity = map[string]int{
@@ -110,6 +111,7 @@ func New() *Plugin {
 }
 
 // init compiles declared regular expressions to Regexp objects which are held in plugin structure
+// and sets timezone for timestamps
 func (p *Plugin) init() error {
 	var err error
 	errors := []error{}
@@ -141,6 +143,14 @@ func (p *Plugin) init() error {
 			"_error": err,
 		}).Error("Cannot parse regular expression defined for capture IP addresses from HTTP request")
 		errors = append(errors, err)
+	}
+
+	p.timezone, _ = time.Now().Zone()
+	if p.timezone != "" {
+		log.WithFields(log.Fields{
+			"_block":    "init",
+			"_timezone": p.timezone,
+		}).Info("Set timezone for timestamps")
 	}
 
 	if len(errors) != 0 {
@@ -256,7 +266,7 @@ func (p *Plugin) processOpenstackLog(data string) (timestamp time.Time, msg stri
 	delete(fields, "timestamp")
 
 	// parse timestamp to time.Time type
-	timestamp, err = time.Parse(timeFormat, timestampStr)
+	timestamp, err = time.Parse(timeFormat, fmt.Sprintf("%s %s", timestampStr, p.timezone))
 	if err != nil {
 		return
 	}
