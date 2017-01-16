@@ -261,7 +261,8 @@ var mockNovaLogs = []*TestCase{
 				"<capabilities>\n<host><uuid>03aa02fc-0414-0590-8906-ca0700080009</uuid>\n</host>\n</capabilities>\n",
 		},
 		output: testOutput{
-			data: "[req-407244e7-4ef1-4180-b139-372e705eda9e - - - - -] Libvirt host capabilities ",
+			data: "[req-407244e7-4ef1-4180-b139-372e705eda9e - - - - -] Libvirt host capabilities \n" +
+				"<capabilities>\n<host><uuid>03aa02fc-0414-0590-8906-ca0700080009</uuid>\n</host>\n</capabilities>\n",
 			tags: map[string]string{
 				"severity_label": "INFO",
 				"severity":       "6",
@@ -335,6 +336,28 @@ var mockHeatLogs = []*TestCase{
 				"http_response_time":     "0.000323",
 				"http_client_ip_address": "10.108.8.212",
 				"http_server_ip_address": "10.0.0.1",
+			},
+		},
+	},
+	&TestCase{
+		input: testInput{
+			logFileName: "heat-api-cfn.log",
+			logData: "2017-01-04 15:25:29.445 6 INFO eventlet.wsgi.server [-] Traceback (most recent call last):\n" +
+				" File \"/var/lib/kolla/venv/local/lib/python2.7/site-packages/eventlet/wsgi.py\", line 481, in handle_one_response\n" +
+				"   result = self.application(self.environ, start_response)\n" +
+				"UnicodeDecodeError: 'utf8' codec can't decode bytes in position 12-13: invalid continuation byte\n\n",
+		},
+		output: testOutput{
+			data: "[-] Traceback (most recent call last):\n" +
+				" File \"/var/lib/kolla/venv/local/lib/python2.7/site-packages/eventlet/wsgi.py\", line 481, in handle_one_response\n" +
+				"   result = self.application(self.environ, start_response)\n" +
+				"UnicodeDecodeError: 'utf8' codec can't decode bytes in position 12-13: invalid continuation byte\n\n",
+			tags: map[string]string{
+				"severity_label": "INFO",
+				"severity":       "6",
+				"pid":            "6",
+				"python_module":  "eventlet.wsgi.server",
+				"logger":         "openstack.heat",
 			},
 		},
 	},

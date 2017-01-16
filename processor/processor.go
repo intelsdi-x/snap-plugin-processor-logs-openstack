@@ -46,7 +46,7 @@ const (
 	// 	Example: 	2016-12-08 03:18:49.626 20 ERROR nova.api.openstack.extensions some_message
 	//
 	timestampRegexp = `(?P<timestamp>(\d{4})-(\d{2})-(\d{2})[( |T)](\d{2}):(\d{2}):(\d{2})[.]?(\d+)?)`
-	logRegexp       = timestampRegexp + `[ ](?P<pid>\d+)[ ](?P<severity_label>\S+)[ ](?P<python_module>\S+)[ ](?P<payload>.*)`
+	logRegexp       = timestampRegexp + `[ ](?P<pid>\d+)[ ](?P<severity_label>\S+)[ ](?P<python_module>\S+)[ ](?P<payload>(\n|.)*)`
 
 	// ***	2) PATTERN FOR REQUEST CONTEXT   ***
 	// 	Openstack payload might include a request context which can tak multiple forms:
