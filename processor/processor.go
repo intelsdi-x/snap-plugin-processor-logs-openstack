@@ -48,7 +48,7 @@ const (
 	//timestampRegexp = `(?P<YYYY>\d{4})-(?P<MM>\d{2})-(?P<DD>\d{2})[( |T)](?P<HH>\d{2}):(?P<mm>\d{2}):(?P<ss>\d{2})[.]?(?P<s>\d+)?`
 
 	timestampRegexp = `(?P<timestamp>(\d{4})-(\d{2})-(\d{2})[( |T)](\d{2}):(\d{2}):(\d{2})[.]?(\d+)?)`
-	logRegexp       = timestampRegexp + `[ ](?P<pid>\d+)[ ](?P<severity_label>\S+)[ ](?P<python_module>\S+)[ ](?P<payload>.*)`
+	logRegexp       = timestampRegexp + `[ ](?P<pid>\d+)[ ](?P<severity_label>\S+)[ ](?P<python_module>\S+)[ ](?P<payload>(\n|.)*)`
 
 	// ***	2) PATTERN FOR REQUEST CONTEXT   ***
 	// 	Openstack payload might include a request context which can tak multiple forms:
