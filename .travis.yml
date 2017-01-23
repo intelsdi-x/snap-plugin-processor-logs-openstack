@@ -1,9 +1,9 @@
 # File managed by pluginsync
-sudo: false
+sudo: true
 language: go
 go:
-- 1.6.4
-- 1.7.4
+- 1.6.x
+- 1.7.x
 env:
   global:
   - ORG_PATH=/home/travis/gopath/src/github.com/intelsdi-x
@@ -13,7 +13,7 @@ env:
   - TEST_TYPE=build
 matrix:
   exclude:
-  - go: 1.6.4
+  - go: 1.6.x
     env: TEST_TYPE=build
 before_install:
 - "[[ -d $SNAP_PLUGIN_SOURCE ]] || mkdir -p $ORG_PATH && ln -s $TRAVIS_BUILD_DIR $SNAP_PLUGIN_SOURCE"
@@ -26,3 +26,45 @@ notifications:
   email: false
   slack:
     secure: VkbZLIc2RH8yf3PtIAxUNPdAu3rQQ7yQx0GcK124JhbEnZGaHyK615V0rbG7HcVmYKGPdB0cXqZiLBDKGqGKb2zR1NepOe1nF03jxGSpPq8jIFeEXSJGEYGL34ScDzZZGuG6qwbjFcXiW5lqn6t8igzp7v2+URYBaZo5ktCS2xY=
+before_deploy:
+- "./scripts/pre_deploy.sh"
+deploy:
+- provider: s3
+  access_key_id: AKIAINMB43VSSPFZISAA
+  secret_access_key:
+    secure: TdsQCyWB2uZ64XFV5q6RdXFGkZV5CJ3rQUXhjlqmsDh1KhVuxV1f981ZRgYwn6JTMhTzSenRriBdCrf9IWu8OrPIuRxMChIaNZHqULBa6NIXTl4pw524wTCuoYyI8mW0CDJBple/Jbh+mrVGYtpYj5rLtoI9UQeqQ9brGdASW9PKPXikKglA3kdJUid2ycT+G2RhJeKs85IIrt+p5RlUQozh1Su+SvXpnDp6QAPBZfpRTeP+xbi2lSZ7l1DbjhOEZPsqkzByzKDYaqp/E6FQvd1/jOPNRXghSAudAQaIuK0lUtiRu/Jvq2lzHkeXRL/kqDnjJMEafyEMh+lfdQSO8zsBmpgQ3P+zZlqi4jTWEtCPXfuGyV+J+nu4vm7zEEVrNLsrCfJxRObm9LtUO5VbF6szGYNzSo/p4EKmsChT6L/YegfWHYm4fsO0JJ6p0DkFM4LgMDBkynSb7MOSylta3DONrrQPjrMGul7wH3FlCQ+QCwFk/k27er1y5bMksoQ3gwPACrNm8mp+PW2TKv6aRn1OhLObQo8ElaaAMUp/SzHGQxbKuG85aySSPcOM/HMsGhQVo0dFlLiypdgEG/QHO82lmoxgX/1Vcn5blEVBeko2EnVBfV2X+tORqx44yEBtM6UxleVoARXoaia9I8UTr5OW/Kdu/fiXyuVwCtxyWLc=
+  bucket: snap.ci.snap-telemetry.io
+  region: us-west-2
+  skip_cleanup: true
+  local-dir: s3
+  upload-dir: plugins
+  acl: public_read
+  on:
+    repo: intelsdi-x/snap-plugin-processor-logs-openstack
+    branch: master
+    condition: $TEST_TYPE = "build" && $TRAVIS_GO_VERSION =~ ^1\.7\.[0-9]+$
+- provider: s3
+  access_key_id: AKIAINMB43VSSPFZISAA
+  secret_access_key:
+    secure: TdsQCyWB2uZ64XFV5q6RdXFGkZV5CJ3rQUXhjlqmsDh1KhVuxV1f981ZRgYwn6JTMhTzSenRriBdCrf9IWu8OrPIuRxMChIaNZHqULBa6NIXTl4pw524wTCuoYyI8mW0CDJBple/Jbh+mrVGYtpYj5rLtoI9UQeqQ9brGdASW9PKPXikKglA3kdJUid2ycT+G2RhJeKs85IIrt+p5RlUQozh1Su+SvXpnDp6QAPBZfpRTeP+xbi2lSZ7l1DbjhOEZPsqkzByzKDYaqp/E6FQvd1/jOPNRXghSAudAQaIuK0lUtiRu/Jvq2lzHkeXRL/kqDnjJMEafyEMh+lfdQSO8zsBmpgQ3P+zZlqi4jTWEtCPXfuGyV+J+nu4vm7zEEVrNLsrCfJxRObm9LtUO5VbF6szGYNzSo/p4EKmsChT6L/YegfWHYm4fsO0JJ6p0DkFM4LgMDBkynSb7MOSylta3DONrrQPjrMGul7wH3FlCQ+QCwFk/k27er1y5bMksoQ3gwPACrNm8mp+PW2TKv6aRn1OhLObQo8ElaaAMUp/SzHGQxbKuG85aySSPcOM/HMsGhQVo0dFlLiypdgEG/QHO82lmoxgX/1Vcn5blEVBeko2EnVBfV2X+tORqx44yEBtM6UxleVoARXoaia9I8UTr5OW/Kdu/fiXyuVwCtxyWLc=
+  bucket: snap.ci.snap-telemetry.io
+  region: us-west-2
+  skip_cleanup: true
+  local-dir: s3
+  upload-dir: plugins
+  acl: public_read
+  on:
+    repo: intelsdi-x/snap-plugin-processor-logs-openstack
+    tags: true
+    condition: $TEST_TYPE = "build" && $TRAVIS_GO_VERSION =~ ^1\.7\.[0-9]+$
+- provider: releases
+  api_key:
+    secure: EO5IvvdUU1yxzzqbQ+ZPGByLb8KCRbOmIFHRPIN4MFT1Ije2aoX7TeohwE/IClYePcXFo8idzn9NB4OuvUf0JyN4M/evSK+hhVmMINT4qkIoc7ybR29cf4JcPPpjBxuRyuLd7YhGDYHwl2m70lKe5kxex1k+0/EyVqwi4zLnjxQBT1guajFIS7YEqo5wky45VJpJtmnWwqtS8HyIaQrw4HSv6xpcnSASD3JzwEG6NcmE7dffd0rOpZZvxKRuMMjwjX2z+xxC1Pk1cCNnAYbC9hbao4WHfdHyUO/oSj/jOZzT2toYRwoIrk/PmGONWUaoVfzkkuPn/qaBDI1z+RHnrJbfrDLvIn+iz/MgKb0/AD0DglNhB5zviqqame4sy2DiAgSidrI54ue4ZbJnEgOC4egOVZcQHPpajCr8/JFsZq2w7BZDiyBUmh3txlwSxnFOvu3TCS9N+PJ2+RxzbeQ7/Y9meBXfAkhrvoISMiyWELtLMvKcJFK0/onHKNFV6bvCDIUZZnf8CnVuBEt0vqVm9au1mXeRlKCa2SpqXlsco5ImeRXmjDFrpkVhlQgZwtQie9Gtr8wLoEoq1A5zyEgIpdM+aSTF/XQcE625NuQgJJOmHdTxg3Fh6bsgIVLz8jgceox9Y9ZgdwGdoPrzvPGMwzVbBjb9IfqH2cD/gPx5cqg=
+  file:
+    - release/snap-plugin-processor-logs-openstack_linux_x86_64
+    - release/snap-plugin-processor-logs-openstack_darwin_x86_64
+  skip_cleanup: true
+  on:
+    repo: intelsdi-x/snap-plugin-processor-logs-openstack
+    tags: true
+    condition: $TEST_TYPE = "build" && $TRAVIS_GO_VERSION =~ ^1\.7\.[0-9]+$
