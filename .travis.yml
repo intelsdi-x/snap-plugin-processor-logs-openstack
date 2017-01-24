@@ -62,7 +62,6 @@ deploy:
     secure: EO5IvvdUU1yxzzqbQ+ZPGByLb8KCRbOmIFHRPIN4MFT1Ije2aoX7TeohwE/IClYePcXFo8idzn9NB4OuvUf0JyN4M/evSK+hhVmMINT4qkIoc7ybR29cf4JcPPpjBxuRyuLd7YhGDYHwl2m70lKe5kxex1k+0/EyVqwi4zLnjxQBT1guajFIS7YEqo5wky45VJpJtmnWwqtS8HyIaQrw4HSv6xpcnSASD3JzwEG6NcmE7dffd0rOpZZvxKRuMMjwjX2z+xxC1Pk1cCNnAYbC9hbao4WHfdHyUO/oSj/jOZzT2toYRwoIrk/PmGONWUaoVfzkkuPn/qaBDI1z+RHnrJbfrDLvIn+iz/MgKb0/AD0DglNhB5zviqqame4sy2DiAgSidrI54ue4ZbJnEgOC4egOVZcQHPpajCr8/JFsZq2w7BZDiyBUmh3txlwSxnFOvu3TCS9N+PJ2+RxzbeQ7/Y9meBXfAkhrvoISMiyWELtLMvKcJFK0/onHKNFV6bvCDIUZZnf8CnVuBEt0vqVm9au1mXeRlKCa2SpqXlsco5ImeRXmjDFrpkVhlQgZwtQie9Gtr8wLoEoq1A5zyEgIpdM+aSTF/XQcE625NuQgJJOmHdTxg3Fh6bsgIVLz8jgceox9Y9ZgdwGdoPrzvPGMwzVbBjb9IfqH2cD/gPx5cqg=
   file:
     - release/snap-plugin-processor-logs-openstack_linux_x86_64
-    - release/snap-plugin-processor-logs-openstack_darwin_x86_64
   skip_cleanup: true
   on:
     repo: intelsdi-x/snap-plugin-processor-logs-openstack
