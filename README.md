@@ -159,7 +159,12 @@ To do that properly, please follow the instruction on [snap-plugin-collector-log
 ```
 $ snapteld -l 1 -t 0 --config config.json
 ```
-In another terminal window:  
+In another terminal window:
+
+Download logs collector plugin:
+```
+$ wget http://snap.ci.snap-telemetry.io/plugins/snap-plugin-collector-logs/latest/linux/x86_64/snap-plugin-collector-logs
+```
 
 Load logs collector plugin:
 ```
@@ -207,6 +212,10 @@ Create a task manifest - see examplary task manifest in [examples/tasks](example
 }
 
 ```
+Download logs-openstack plugin:
+```
+$ wget http://snap.ci.snap-telemetry.io/plugins/snap-plugin-processor-logs-openstack/latest/linux/x86_64/snap-plugin-processor-logs-openstack
+```
 Load logs-openstack plugin for processing:
 ```
 $ snaptel plugin load snap-plugin-processor-logs-openstack
@@ -216,6 +225,10 @@ Version: 1
 Type: processor
 Signed: false
 Loaded Time: Wed, 04 Jan 2017 15:02:37 CET
+```
+Download file plugin:
+```
+$ wget http://snap.ci.snap-telemetry.io/plugins/snap-plugin-publisher-file/latest/linux/x86_64/snap-plugin-publisher-file
 ```
 
 Load file plugin for publishing:
