@@ -33,7 +33,7 @@ const (
 	//Name of the plugin
 	Name = "logs-openstack"
 	//Version of the plugin
-	Version = 1
+	Version = 2
 
 	timeFormat = "2006-01-02 15:04:05 MST"
 )
